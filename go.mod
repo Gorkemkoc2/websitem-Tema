@@ -1,3 +1,3 @@
-module github.com/adityatelange/hugo-PaperMod
+module github.com/Gorkemkoc2/websitem-Tema
 
 go 1.12
