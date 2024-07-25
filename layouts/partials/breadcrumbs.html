@@ -1,4 +1,4 @@
-{{- if (.Param "ShowBreadCrumbs") -}}
+{{- if .Params.showBreadcrumbs -}}
 <div class="breadcrumbs">
     {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" }}
     {{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
@@ -10,6 +10,13 @@
 
     {{- $path = printf "%s/%s" $path $element }}
     {{- $bc_pg := site.GetPage $path -}}
+
+    {{- print "Element: " $element | safeHTML }}
+    {{- if $bc_pg }}
+        {{- print "Page Found: " $bc_pg.Name | safeHTML }}
+    {{- else }}
+        {{- print "Page Not Found: " $path | safeHTML }}
+    {{- end }}
 
     {{- if $bc_pg }}
         {{- if (and ($bc_pg) (gt (len . ) 0))}}
