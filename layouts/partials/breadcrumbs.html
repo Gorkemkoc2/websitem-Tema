@@ -2,7 +2,7 @@
 <div class="breadcrumbs">
     {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" }}
     {{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
-    {{ $postSection := "posts" }}  ```
+    {{ $postSection := "posts" }}
 
     <a href="{{ "" | absLangURL }}">{{ i18n "home" | default "Anasayfa" }}</a>
     {{- $scratch := newScratch }}
