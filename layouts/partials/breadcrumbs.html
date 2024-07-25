@@ -13,6 +13,7 @@
     {{- if (and ($bc_pg) (gt (len . ) 0))}}
     {{- print "&nbsp;»&nbsp;" | safeHTML -}}
     {{ if eq $bc_pg.Name "Posts" }}
+      {{ print "Posts found!" | safeHTML }}
       <a href="{{ $bc_pg.Permalink }}">{{ i18n "posts" | default "Yazılar" }}</a>
     {{ else }}
       <a href="{{ $bc_pg.Permalink }}">{{ $bc_pg.Name }}</a>
