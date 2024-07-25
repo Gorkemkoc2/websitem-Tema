@@ -10,10 +10,16 @@
     {{- $scratch.Add "path" (printf "%s/" $element )}}
     {{- $bc_pg := site.GetPage ($scratch.Get "path") -}}
 
+    {{- print "Element: " $element | safeHTML }}
+    {{- if $bc_pg }}
+        {{- print "Page Found: " $bc_pg.Name | safeHTML }}
+    {{- else }}
+        {{- print "Page Not Found: " $scratch.Get "path" | safeHTML }}
+    {{- end }}
+
     {{- if (and ($bc_pg) (gt (len . ) 0))}}
     {{- print "&nbsp;»&nbsp;" | safeHTML -}}
     {{ if eq $bc_pg.Name "Posts" }}
-      {{ print "Posts found!" | safeHTML }}
       <a href="{{ $bc_pg.Permalink }}">{{ i18n "posts" | default "Yazılar" }}</a>
     {{ else }}
       <a href="{{ $bc_pg.Permalink }}">{{ $bc_pg.Name }}</a>
