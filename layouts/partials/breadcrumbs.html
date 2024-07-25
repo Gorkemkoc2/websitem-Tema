@@ -2,6 +2,7 @@
 <div class="breadcrumbs">
     {{- $url := replace .Parent.Permalink (printf "%s" site.Home.Permalink) "" }}
     {{- $lang_url := strings.TrimPrefix (printf "%s/" .Lang) $url -}}
+    {{ $postSection := "posts" }}  ```
 
     <a href="{{ "" | absLangURL }}">{{ i18n "home" | default "Anasayfa" }}</a>
     {{- $scratch := newScratch }}
@@ -11,7 +12,9 @@
     {{- $bc_pg := site.GetPage ($scratch.Get "path") -}}
 
     {{- if (and ($bc_pg) (gt (len . ) 0))}}
-    {{- print "&nbsp;»&nbsp;" | safeHTML -}}<a href="{{ $bc_pg.Permalink }}">{{ i18n "posts" | default "Yazılar" }}</a>
+    {{- if eq $bc_pg.Section $postSection }}
+      {{- print "&nbsp;»&nbsp;" | safeHTML -}}<a href="{{ $bc_pg.Permalink }}">{{ i18n "posts" | default "Yazılar" }}</a>
+    {{- end }}
     {{- end }}
 
     {{- end -}}
