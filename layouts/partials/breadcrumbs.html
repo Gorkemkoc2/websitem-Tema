@@ -1,6 +1,10 @@
 {{- if .Params.showBreadcrumbs -}}
 <div class="breadcrumbs">
-    <a href="{{ "" | absLangURL }}">{{ i18n "home" | default "Anasayfa" }}</a>
+    <a href="{{ "" | absLangURL }}">Anasayfa</a>
+    {{- if .IsPage }}
+    &nbsp;»&nbsp;<a href="/yazilar">Yazılar</a>
+    &nbsp;»&nbsp;{{ .Title }}
+    {{- else }}
     {{- $url := replace .Permalink (printf "%s" site.Home.Permalink) "" }}
     {{- $url_segments := split $url "/" }}
     {{- $path := "" }}
@@ -10,8 +14,13 @@
         {{- $page := site.GetPage $path -}}
         {{- if $page }}
             {{- if gt $index 0 }}&nbsp;»&nbsp;{{ end }}
-            <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+            {{ if eq $page.Name "Posts" }}
+              <a href="{{ $page.Permalink }}">{{ i18n "posts" | default "Yazılar" }}</a>
+            {{ else }}
+              <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+            {{ end }}
         {{- end }}
+    {{- end }}
     {{- end }}
 </div>
 {{- end -}}
